@@ -2,9 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Главная страница</title>
+    <title>{{ main_title|default:"Без заголовка" }}</title>
 </head>
 <body>
-<h1>Главная страница</h1>
+<p>{{ menu|join:" | " }}</p>
+<p>{{ float|add:50 }}</p>
+<p>{{ list| lenght }}</p>
+<p>{{ set }}</p>
+<p>{{ dict }}</p>
+<p>{{ obj }}</p>
+<h1>{{ title|capfirst }}</h1>
 </body>
 </html>
