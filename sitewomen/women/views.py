@@ -6,24 +6,17 @@ from django.template.loader import render_to_string
 menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
 
 
-class MyClass:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-
+data_db = [
+    {'id': 1, 'title':'Анджелина Джоли', 'content': 'Биография Анджелины Джоли', 'is_published': True},
+    {'id': 1, 'title':'Марго Робби', 'content': 'Биография Марго Робби', 'is_published': False },
+    {'id': 1, 'title':'Джулия Робертс', 'content': 'Биография Джулия Робертс', 'is_published': True},
+]
 
 def index(request):
-    # t = render_to_string('women/index.html')
-    # return HttpResponse(t)
     data = {
         'title': 'главная страница',
-        'main_title': 'title',
         'menu': menu,
-        'float': 26.58,
-        'lst': [1, 2, 'abc', True],
-        'set': {1, 2, 4, 8, 2},
-        'dict': { 'key_1': 'value_1','key_2': 'value_2'},
-        'obj': MyClass(1, 20),
+        'posts': data_db,
     }
     return render(request, 'women/index.html', context=data)
 
