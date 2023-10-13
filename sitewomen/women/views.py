@@ -3,7 +3,11 @@ from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 
 
-menu = ["О сайте", "Добавить статью", "Обратная связь", "Войти"]
+menu = [{'title': "О сайте", 'url_name': 'about'},
+        {'title': "Добавить статью", 'url_name': 'addpage'},
+        {'title': "Обратная связь", 'url_name': 'contact'},
+         {'title': "Войти", 'url_name': 'login'},
+]
 
 
 data_db = [
@@ -40,6 +44,21 @@ def archive(request, year):
         return redirect('home')
 
     return HttpResponse(f"<h1>Архив по годам</h1><p>{year}</p>")
+
+def show_post(request, post_id):
+    return HttpResponse(f"Отображение статьи с id = {post_id}")
+
+
+def addpage(request):
+    return HttpResponse("Добавление статьи")
+
+
+def contact(request):
+    return HttpResponse("Обратная связь")
+
+
+def login(request):
+    return HttpResponse("Авторизация")
 
 
 def page_not_found(request, exception):
