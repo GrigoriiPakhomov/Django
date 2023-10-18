@@ -9,11 +9,16 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
          {'title': "Войти", 'url_name': 'login'},
 ]
 
-
 data_db = [
     {'id': 1, 'title':'Анджелина Джоли', 'content': 'Биография Анджелины Джоли', 'is_published': True},
     {'id': 1, 'title':'Марго Робби', 'content': 'Биография Марго Робби', 'is_published': False },
     {'id': 1, 'title':'Джулия Робертс', 'content': 'Биография Джулия Робертс', 'is_published': True},
+]
+
+cats_db = [
+    {'id': 1, 'name': 'Актрисы'},
+    {'id': 2, 'name': 'Певицы'},
+    {'id': 3, 'name': 'Спортсменки'},
 ]
 
 def index(request):
@@ -21,6 +26,7 @@ def index(request):
         'title': 'главная страница',
         'menu': menu,
         'posts': data_db,
+        'cat_selected': 0,
     }
     return render(request, 'women/index.html', context=data)
 
@@ -43,6 +49,16 @@ def contact(request):
 
 def login(request):
     return HttpResponse("Авторизация")
+
+
+def show_category(request, cat_id):
+    data = {
+        'title': 'главная страница',
+        'menu': menu,
+        'posts': data_db,
+        'cat_selected': cat_id,
+    }
+    return render(request, 'women/index.html', context=data)
 
 
 def page_not_found(request, exception):
