@@ -55,3 +55,6 @@ class TagPost(models.Model):
 
     def __str__(self):
         return self.tag # возвращает название тега
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_slug': self.slug})

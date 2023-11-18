@@ -14,6 +14,7 @@ urlpatterns = [
     path('contact', views.contact, name='contact'),
     path('login', views.login, name='login'),
     path('category/<slug:cat_slug>/', views.show_category, name='category'),
+    path('tag/<slug:tag_slug>/', views.show_tag_postlist, name='tag')
     # path("cats/<int:cat_id>/", views.categories, name='cats_id'),  # http://127.0.0.1:8000/cats/123/
     # path("cats/<slug:cat_slug>/", views.categories_by_slug, name='cats'),  # http://127.0.0.1:8000/cats/asdf/
     # path("archive/<year4:year>/", views.archive, name='archive')
