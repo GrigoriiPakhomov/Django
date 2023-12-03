@@ -10,15 +10,16 @@ menu = [{'title': "О сайте", 'url_name': 'about'},
          {'title': "Войти", 'url_name': 'login'},
 ]
 
-data_db = [
-    {'id': 1, 'title':'Анджелина Джоли', 'content': 'Биография Анджелины Джоли', 'is_published': True},
-    {'id': 1, 'title':'Марго Робби', 'content': 'Биография Марго Робби', 'is_published': False },
-    {'id': 1, 'title':'Джулия Робертс', 'content': 'Биография Джулия Робертс', 'is_published': True},
-]
+# data_db = [
+#     {'id': 1, 'title':'Анджелина Джоли', 'content': 'Биография Анджелины Джоли', 'is_published': True},
+#     {'id': 1, 'title':'Марго Робби', 'content': 'Биография Марго Робби', 'is_published': False },
+#     {'id': 1, 'title':'Джулия Робертс', 'content': 'Биография Джулия Робертс', 'is_published': True},
+# ]
 
 
 def index(request):
-    posts = Women.published.all()
+    posts = Women.published.all().select_related('cat')
+
     data = {
         'title': 'главная страница',
         'menu': menu,
@@ -59,7 +60,7 @@ def login(request):
 
 def show_category(request, cat_slug):
     category = get_object_or_404(Category, slug=cat_slug)
-    posts = Women.published.filter(cat_id=category.pk)
+    posts = Women.published.filter(cat_id=category.pk).select_related('cat')
     data = {
         'title': f'Рубрика: {category.name}',
         'menu': menu,
@@ -75,7 +76,7 @@ def page_not_found(request, exception):
 
 def show_tag_postlist(request, tag_slug):
     tag = get_object_or_404(TagPost, slug=tag_slug)
-    posts = tag.tags.filter(is_published=Women.Status.PUBLISHED)
+    posts = tag.tags.filter(is_published=Women.Status.PUBLISHED).select_related('cat')
 
     data = {
         'title':f"Tag: {tag.tag}",
